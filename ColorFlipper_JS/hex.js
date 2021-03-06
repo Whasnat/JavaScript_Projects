@@ -10,6 +10,7 @@ btn.addEventListener("click", function(){
    console.log(randomHex);
 });
 
+//hex generator function
 function hexGenerator(){
     let hexColor = "#";
     for(let i=0; i<6; i++){
