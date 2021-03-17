@@ -20,4 +20,5 @@ questions.forEach(question => {
     });
 });
 
+// END OF SOLUTION-2
 
