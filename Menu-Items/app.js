@@ -71,4 +71,38 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "Pizza Italiano",
+    category: "lunch",
+    price: 18.99,
+    img: "./images/item-11.jpeg",
+    desc: `Authentic Italian pizza. Made with italian frmalino flower, Hemalian Pink Sault, freshly made Goat chese and romanio tomato sauce`,
+  },
 ];
+
+
+const sectionCntr = document.querySelector(".section-center");
+window.addEventListener("DOMContentLoaded", () => {
+  let displayMenu = menu.map(item => {
+    
+        //[use `` not '' or ""]
+        return `<article class="menu-item">                                 
+              <img src=${item.img} alt=${item.title} class="photo">
+              <div class="item-info">
+                <header>
+                  <h4>${item.title}</h4>
+                  <h4 class="price">${item.price}</h4>
+                </header>
+                <p class="item-text">
+                  ${item.desc}
+                </p>
+              </div>
+            </article>`;
+
+            //***NOTE*** [To return HTML from js use `` not '' or ""]
+  });
+  displayMenu = displayMenu.join("");
+  console.log(displayMenu);
+  sectionCntr.innerHTML = displayMenu;
+});
