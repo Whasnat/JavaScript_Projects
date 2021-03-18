@@ -30,7 +30,7 @@ const menu = [
     category: "breakfast",
     price: 20.99,
     img: "./images/item-4.jpeg",
-    desc: `Shabby chic keffiyeh neutra snackwave pork belly shoreditch. Prism austin mlkshk truffaut, `,
+    desc: `Shabby chic keffiyeh neutra snackwave pork belly shoreditch. Prism austin mlkshk truffaut `,
   },
   {
     id: 5,
@@ -80,23 +80,71 @@ const menu = [
     img: "./images/item-11.jpeg",
     desc: `Authentic Italian pizza. Made with italian frmalino flower, Hemalian Pink Sault, freshly made Goat chese and romanio tomato sauce`,
   },
+  {
+    id: 11,
+    title: "Pumpkin Pie",
+    category: "dessert",
+    price: 6.99,
+    img: "./images/item-12.jpeg",
+    desc: `Authentic Italian pie. Made with pumpkin, cane sugar, flower, vanilla extract and love`,
+  },
+  {
+    id: 12,
+    title: "Steak Dinner",
+    category: "dinner",
+    price: 36.99,
+    img: "./images/item-12.jpeg",
+    desc: `Shabby chic keffiyeh neutra snackwave pork belly shoreditch. Prism austin mlkshk truffaut `,
+  },
 ];
 
-
-
-
-const sectionCntr = document.querySelector(".section-center");
-const fltrBtn = document.querySelector(".filter-btn");
+const selectionCenter = document.querySelector(".section-center");
+const btnContainer = document.querySelector(".btn-container");
 
 window.addEventListener("DOMContentLoaded", () => {
   displayMenuItems(menu);
+  filters();
 });
 
-fltrBtn.forEach(btn => {
-  btn.addEventListener("click", e => {
-    const catagory = e.currentTarget.dataset.id;
+
+// Dynamic filters function
+function filters(){
+  //iterate over the menu and return categories as an array
+  const categories = menu.reduce((values, item) => {
+    if(!values.includes(item.category)){
+      values.push(item.category);
+    }
+    return values;
+  },["all"]); 
+
+  // Map the categories array as buttons
+  const categoryBtn = categories.map(category => {
+    return `<button class="filter-btn" type="button" data-id =${category}>${category}</button>`
+  }).join("");
+
+  btnContainer.innerHTML = categoryBtn; // add the buttons in btn-container
+
+
+  //Filter menu items
+  const filterBtn = document.querySelectorAll(".filter-btn"); // Select the btn class
+  filterBtn.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const category = e.currentTarget.dataset.id;  // get each btn by data-[id]
+      //console.log(category);
+      const menuCategory = menu.filter(menuItem => {
+        if(menuItem.category === category){
+          //console.log(menuItem.category) 
+          return menuItem;
+        }
+      });
+      if(category === "all"){
+        displayMenuItems(menu);
+      } else{
+        displayMenuItems(menuCategory);
+      }
+    });
   });
-});
+}
 
 
 
@@ -110,7 +158,7 @@ function displayMenuItems (menuItems){
           <div class="item-info">
             <header>
               <h4>${item.title}</h4>
-              <h4 class="price">${item.price}</h4>
+              <h4 class="price">$${item.price}</h4>
             </header>
             <p class="item-text">
               ${item.desc}
@@ -122,5 +170,5 @@ function displayMenuItems (menuItems){
 });
 displayMenu = displayMenu.join("");
 // console.log(displayMenu);
-sectionCntr.innerHTML = displayMenu;
+selectionCenter.innerHTML = displayMenu; // add display items to section-center
 }
