@@ -106,7 +106,6 @@ window.addEventListener("DOMContentLoaded", () => {
   filters();
 });
 
-
 // Dynamic filters function
 function filters(){
   //iterate over the menu and return categories as an array
@@ -125,15 +124,13 @@ function filters(){
   btnContainer.innerHTML = categoryBtn; // add the buttons in btn-container
 
 
-  //Filter menu items
+  //Filter menu items on click
   const filterBtn = document.querySelectorAll(".filter-btn"); // Select the btn class
   filterBtn.forEach(btn => {
     btn.addEventListener("click", e => {
       const category = e.currentTarget.dataset.id;  // get each btn by data-[id]
-      //console.log(category);
       const menuCategory = menu.filter(menuItem => {
         if(menuItem.category === category){
-          //console.log(menuItem.category) 
           return menuItem;
         }
       });
@@ -166,9 +163,8 @@ function displayMenuItems (menuItems){
           </div>
         </article>`;
 
-        //***NOTE*** [To return HTML from a function use [``], not [''] or [""]. ]
+        //***NOTE*** [To map HTML-template from a function use `` in return, not '' or "" ]
 });
 displayMenu = displayMenu.join("");
-// console.log(displayMenu);
 selectionCenter.innerHTML = displayMenu; // add display items to section-center
 }
