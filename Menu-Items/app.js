@@ -1,3 +1,4 @@
+// MenuItemLIST // External-API// MenuItemObjects // listItems
 const menu = [
   {
     id: 1,
@@ -82,27 +83,44 @@ const menu = [
 ];
 
 
-const sectionCntr = document.querySelector(".section-center");
-window.addEventListener("DOMContentLoaded", () => {
-  let displayMenu = menu.map(item => {
-    
-        //[use `` not '' or ""]
-        return `<article class="menu-item">                                 
-              <img src=${item.img} alt=${item.title} class="photo">
-              <div class="item-info">
-                <header>
-                  <h4>${item.title}</h4>
-                  <h4 class="price">${item.price}</h4>
-                </header>
-                <p class="item-text">
-                  ${item.desc}
-                </p>
-              </div>
-            </article>`;
 
-            //***NOTE*** [To return HTML from js use `` not '' or ""]
-  });
-  displayMenu = displayMenu.join("");
-  console.log(displayMenu);
-  sectionCntr.innerHTML = displayMenu;
+
+const sectionCntr = document.querySelector(".section-center");
+const fltrBtn = document.querySelector(".filter-btn");
+
+window.addEventListener("DOMContentLoaded", () => {
+  displayMenuItems(menu);
 });
+
+fltrBtn.forEach(btn => {
+  btn.addEventListener("click", e => {
+    const catagory = e.currentTarget.dataset.id;
+  });
+});
+
+
+
+// Display Menu Items on DOM Content Loaded
+function displayMenuItems (menuItems){
+  let displayMenu = menuItems.map(item => {
+    
+    //[use `` not '' or ""]
+    return `<article class="menu-item">                                 
+          <img src=${item.img} alt=${item.title} class="photo">
+          <div class="item-info">
+            <header>
+              <h4>${item.title}</h4>
+              <h4 class="price">${item.price}</h4>
+            </header>
+            <p class="item-text">
+              ${item.desc}
+            </p>
+          </div>
+        </article>`;
+
+        //***NOTE*** [To return HTML from a function use [``], not [''] or [""]. ]
+});
+displayMenu = displayMenu.join("");
+// console.log(displayMenu);
+sectionCntr.innerHTML = displayMenu;
+}
