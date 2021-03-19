@@ -251,6 +251,8 @@ h1 {
   display: block;
   transition: var(--transition);
 }
+
+/*Button qwitch*/
 .slide .switch {
   left: 50%;
 }
